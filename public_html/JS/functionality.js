@@ -1,12 +1,14 @@
-
-functionality = (function(){
-    var init = (function(){
-        $('.usersContent').html(_buildContent(usersObj, 'none', 'highToLow'));
-        _listeners();
+var functionality = (function() {
+    /**
+     * Things what must be done when page is loaded
+     */
+    var init = (function() {
+        $('.usersContent').html(buildContent(usersObj, 'none', 'highToLow'));
+        listeners();
     });
-    
-    var usersObj = [
-        { 
+
+    //Array of object with users data
+    var usersObj = [{
             name: 'Bao',
             surname: 'Stennett',
             email: 'bao.stennett@test.com',
@@ -14,7 +16,7 @@ functionality = (function(){
             age: 24,
             city: 'London'
         },
-        { 
+        {
             name: 'Reta',
             surname: 'Redel',
             email: 'reta.redel"test.com',
@@ -22,7 +24,7 @@ functionality = (function(){
             age: 62,
             city: 'Essex'
         },
-        { 
+        {
             name: 'Corrin',
             surname: 'Solano',
             email: 'corrin.solano@test.com',
@@ -30,7 +32,7 @@ functionality = (function(){
             age: 72,
             city: 'Reading'
         },
-        { 
+        {
             name: 'Modesta',
             surname: 'Talbot',
             email: 'modesta.talbot@test.com',
@@ -38,7 +40,7 @@ functionality = (function(){
             age: 26,
             city: 'London'
         },
-        { 
+        {
             name: 'Leigh',
             surname: 'Czech',
             email: 'leigh.czech@test.com',
@@ -46,7 +48,7 @@ functionality = (function(){
             age: 33,
             city: 'Staffordshire'
         },
-        { 
+        {
             name: 'Russ',
             surname: 'Conway',
             email: 'russ.conway@test.com',
@@ -54,7 +56,7 @@ functionality = (function(){
             age: 19,
             city: 'Ceredigion'
         },
-        { 
+        {
             name: 'Margaretta',
             surname: 'Sison',
             email: 'margaretta.sison@test.com',
@@ -62,7 +64,7 @@ functionality = (function(){
             age: 38,
             city: 'Glasgow'
         },
-        { 
+        {
             name: 'Marlin',
             surname: 'Kunkel',
             email: 'marlin.kunkel@test.com',
@@ -70,7 +72,7 @@ functionality = (function(){
             age: 64,
             city: 'Liverpool'
         },
-        { 
+        {
             name: 'Dominic',
             surname: 'Hurston',
             email: 'dominic.hurston@test.com',
@@ -78,7 +80,7 @@ functionality = (function(){
             age: 23,
             city: 'Brighton'
         },
-        { 
+        {
             name: 'Starla',
             surname: 'Poteete',
             email: 'starla.poteete@test.com',
@@ -91,36 +93,41 @@ functionality = (function(){
     /**
      * In this function are all listeners pined to DOM
      */
-
-    var _listeners = (function(){
-        $('#userSorting').on('change', function(){
-            _selectSortingMethod();
+    var listeners = (function() {
+        $('#userSorting').on('change', function() {
+            selectSortingMethod();
         });
-        
-        $(window).on('click', function(e){
-            if(e.target.id === 'addNewUser' || e.target.id === 'trigger'){
+
+        $(window).on('click', function(e) {
+            //Showing new user popup
+            if (e.target.id === 'addNewUser' || e.target.id === 'trigger') {
                 $('#popup').removeClass('hidden');
                 $('#popupWindow').removeClass('hidden');
                 $('#userSorting').attr('disabled', true);
-            } else if (e.target.id === 'closePopup'){
+                //Closing popup
+            } else if (e.target.id === 'closePopup') {
                 $('#popup').addClass('hidden');
                 $('#popupWindow').addClass('hidden');
                 $('#userSorting').attr('disabled', false);
-                _clearForm();
-            } else if (e.target.id === 'addUser') {    
-                if(_validateForm()) {
-                    _addUser();
-                    _selectSortingMethod();
+                clearForm();
+                //Accept creating user
+            } else if (e.target.id === 'addUser') {
+                if (validateForm()) {
+                    addUser();
+                    selectSortingMethod();
                     $('#popup').addClass('hidden');
                     $('#popupWindow').addClass('hidden');
                     $('#userSorting').attr('disabled', false);
-                    _clearForm();
+                    clearForm();
                 }
             }
         });
     });
 
-    var _addUser = (function(){
+    /**
+     * Adding new user to usersObj where are stored other users
+     */
+    var addUser = (function() {
         usersObj.push({
             name: $('#name').val(),
             surname: $('#surname').val(),
@@ -131,31 +138,40 @@ functionality = (function(){
         })
     });
 
-    var _validateEmail = (function(){ 
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($('#email').val())){
+    /**
+     * Checking that the email have correct format
+     */
+    var validateEmail = (function() {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($('#email').val())) {
             return (true)
         }
         return (false)
     });
 
-    var _validateForm = (function(){
+    /**
+     * Function what check that all fields are filled properly
+     * In logicalTestPassed is stored number of passsed test
+     * quantity of test is 6 so if all test are passed 
+     * function return true otherway false
+     */
+    var validateForm = (function() {
         var logicalTestPassed = 0;
         //Validate name
-        if($('#name').val().length === 0) {
+        if ($('#name').val().length === 0) {
             $('#nameAlert').html('Name is required');
         } else {
             logicalTestPassed++;
             $('#nameAlert').html('');
         }
         //Validate surname
-        if($('#surname').val().length === 0) {
+        if ($('#surname').val().length === 0) {
             $('#surnameAlert').html('Surname is required');
         } else {
             logicalTestPassed++;
             $('#surnameAlert').html('');
         }
         //Validate email
-        if(!_validateEmail() && $('#email').val().length > 0) {
+        if (!validateEmail() && $('#email').val().length > 0) {
             $('#emailAlert').html('Incorrect e-mail format');
         } else {
             logicalTestPassed++;
@@ -170,20 +186,20 @@ functionality = (function(){
         }
         //Validate phone
         console.log($('#phone').val());
-        if(isNaN($('#phone').val()) || !$('#phone').val() === null) {
+        if (isNaN($('#phone').val()) || !$('#phone').val() === null) {
             $('#phoneAlert').html('Given value is not a number');
         } else {
             logicalTestPassed++;
             $('#phoneAlert').html('');
         }
         //Validate city
-        if($('#city').val().length === 0) {
+        if ($('#city').val().length === 0) {
             $('#cityAlert').html('City is required');
         } else {
             logicalTestPassed++;
             $('#cityAlert').html('');
         }
-        if(logicalTestPassed === 6) {
+        if (logicalTestPassed === 6) {
             return true;
         } else {
             return false;
@@ -196,9 +212,9 @@ functionality = (function(){
      * @param {String} param witch column will be taken to sorting (name or city)
      * @param {String} direction direction of sorting (lowToHigh or highToLow)
      */
-    var _buildContent = (function(usersArr, param, direction) {
+    var buildContent = (function(usersArr, param, direction) {
         var content = '';
-        _sortArray(usersArr, param, direction).forEach(function (el) {
+        sortArray(usersArr, param, direction).forEach(function(el) {
             content += '<div class="user">';
             content += '<h2>' + el.name + ' ' + el.surname + '<span>( ' + el.age + ' )</span>' + '</h2>';
             content += '<h3>' + el.city + '</h3>';
@@ -212,17 +228,17 @@ functionality = (function(){
     /**
      * Function called when selected sorting method is changing
      */
-    var _selectSortingMethod = (function(){
-        if ($('#userSorting').val() == 1){
-            $('.usersContent').html(_buildContent(usersObj, 'name', 'lowToHigh'));
-        } else if ($('#userSorting').val() == 2){
-            $('.usersContent').html(_buildContent(usersObj, 'name', 'highToLow'));
-        } else if ($('#userSorting').val() == 3){
-            $('.usersContent').html(_buildContent(usersObj, 'city', 'lowToHigh'));
-        } else if ($('#userSorting').val() == 4){
-            $('.usersContent').html(_buildContent(usersObj, 'city', 'highToLow'));
+    var selectSortingMethod = (function() {
+        if ($('#userSorting').val() == 1) {
+            $('.usersContent').html(buildContent(usersObj, 'name', 'lowToHigh'));
+        } else if ($('#userSorting').val() == 2) {
+            $('.usersContent').html(buildContent(usersObj, 'name', 'highToLow'));
+        } else if ($('#userSorting').val() == 3) {
+            $('.usersContent').html(buildContent(usersObj, 'city', 'lowToHigh'));
+        } else if ($('#userSorting').val() == 4) {
+            $('.usersContent').html(buildContent(usersObj, 'city', 'highToLow'));
         } else {
-            $('.usersContent').html(_buildContent(usersObj, 'none', 'highToLow'));
+            $('.usersContent').html(buildContent(usersObj, 'none', 'highToLow'));
         }
     });
 
@@ -232,49 +248,49 @@ functionality = (function(){
      * @param {String} param witch column will be taken to sorting (name or city)
      * @param {String} direction direction of sorting (lowToHigh or highToLow)
      */
-    var _sortArray = (function(array, param, direction){
+    var sortArray = (function(array, param, direction) {
         var temp;
-        if( param === 'name' ){
-            if ( direction === 'lowToHigh' ){
-                for (i = 0; i<array.length-1 ; i++){
-                    for (j = 0; j<array.length-i-1; j++){
-                        if (array[j].name > array[j+1].name){
+        if (param === 'name') {
+            if (direction === 'lowToHigh') {
+                for (i = 0; i < array.length - 1; i++) {
+                    for (j = 0; j < array.length - i - 1; j++) {
+                        if (array[j].name > array[j + 1].name) {
                             temp = array[j];
-                            array[j] = array[j+1];
-                            array[j+1] = temp;
+                            array[j] = array[j + 1];
+                            array[j + 1] = temp;
                         }
                     }
                 }
             } else {
-                for (i = 0; i<array.length-1 ; i++){
-                    for (j = 0; j<array.length-i-1; j++){
-                        if (array[j].name < array[j+1].name){
+                for (i = 0; i < array.length - 1; i++) {
+                    for (j = 0; j < array.length - i - 1; j++) {
+                        if (array[j].name < array[j + 1].name) {
                             temp = array[j];
-                            array[j] = array[j+1];
-                            array[j+1] = temp;
+                            array[j] = array[j + 1];
+                            array[j + 1] = temp;
                         }
                     }
                 }
 
             }
         } else {
-            if ( direction === 'lowToHigh' ){
-                for (i = 0; i<array.length-1 ; i++){
-                    for (j = 0; j<array.length-i-1; j++){
-                        if (array[j].city > array[j+1].city){
+            if (direction === 'lowToHigh') {
+                for (i = 0; i < array.length - 1; i++) {
+                    for (j = 0; j < array.length - i - 1; j++) {
+                        if (array[j].city > array[j + 1].city) {
                             temp = array[j];
-                            array[j] = array[j+1];
-                            array[j+1] = temp;
+                            array[j] = array[j + 1];
+                            array[j + 1] = temp;
                         }
                     }
                 }
             } else {
-                for (i = 0; i<array.length-1 ; i++){
-                    for (j = 0; j<array.length-i-1; j++){
-                        if (array[j].city < array[j+1].city){
+                for (i = 0; i < array.length - 1; i++) {
+                    for (j = 0; j < array.length - i - 1; j++) {
+                        if (array[j].city < array[j + 1].city) {
                             temp = array[j];
-                            array[j] = array[j+1];
-                            array[j+1] = temp;
+                            array[j] = array[j + 1];
+                            array[j + 1] = temp;
                         }
                     }
                 }
@@ -283,7 +299,11 @@ functionality = (function(){
         return array;
     });
 
-    var _clearForm = (function() {
+    /**
+     * Cleaning new user form, this function is used after
+     * creating user and after closing popup
+     */
+    var clearForm = (function() {
         $('#name').val('');
         $('#surname').val('');
         $('#email').val('');
@@ -298,7 +318,10 @@ functionality = (function(){
         $('#cityAlert').html('');
     });
 
-    $(document).ready(function(){
-        init(); 
+    /**
+     * Functions what must be executed when document is fully loaded
+     */
+    $(document).ready(function() {
+        init();
     });
 })();
