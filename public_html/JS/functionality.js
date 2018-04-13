@@ -114,6 +114,7 @@ functionality = (function(){
                     $('#popup').addClass('hidden');
                     $('#popupWindow').addClass('hidden');
                     $('#userSorting').attr('disabled', false);
+                    _clearForm();
                 }
             }
         });
