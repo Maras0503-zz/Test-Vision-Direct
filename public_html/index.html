@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Test Vision Direct</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="CSS/reset.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/main.css" rel="stylesheet" type="text/css"/>
+        
+
+        <script src="JS/jquery-3.1.1.js" type="text/javascript"></script>
+        <script src="JS/functionality.js" type="text/javascript"></script>
+        
+    </head>
+    <body>
+        <div class='sideMenu'>
+            <button id='addNewUser'>ADD NEW USER</button>            
+        </div>
+        <div class='topBar'>
+            <div id='trigger' class='trigger'>
+                +
+            </div>
+            <select id='userSorting'>
+                    <option value='0' selected>Sort</option>
+                    <option value='1'>Name: Low to High</option>
+                    <option value='2'>Name: High to Low</option>
+                    <option value='3'>City: Low to High</option>
+                    <option value='4'>City: High to Low</option>
+                </select>
+        </div>
+        <div class='usersWrapper'>
+            <div class='usersContent'></div>
+        </div>
+        <div id='popup' class='popupUnderlay hidden'></div>
+        <div id='popupWindow' class='popupWindow hidden'>
+            <span id='closePopup' class='cross'>&#10754</span>
+            <label for='name'>Name:</label>
+            <span id='nameAlert' class='inputAlert'></span>
+            <input id='name' type='text' required>
+
+            <label for='surname'>Surname:</label>
+            <span id='surnameAlert' class='inputAlert'></span>
+            <input id='surname' type='text' required>
+
+            <label for='age'>Age:</label>
+            <span id='ageAlert' class='inputAlert'></span>
+            <input id='age' type='number'>
+
+            <label for='email'>E-mail:</label>
+            <span id='emailAlert' class='inputAlert'></span>
+            <input id='email' type='email'>
+
+            <label for='phone'>Phone number:</label>
+            <span id='phoneAlert' class='inputAlert'></span>
+            <input id='phone' type='text'>
+
+            <label for='city'>City:</label>
+            <span id='cityAlert' class='inputAlert'></span>
+            <input id='city' type='text'>
+
+            <button id='addUser'>Add</button>
+        </div>
+    </body>
+</html>
