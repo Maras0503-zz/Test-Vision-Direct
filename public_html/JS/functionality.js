@@ -19,7 +19,7 @@ var functionality = (function() {
         {
             name: 'Reta',
             surname: 'Redel',
-            email: 'reta.redel"test.com',
+            email: 'reta.redel@test.com',
             phone: '01371247018',
             age: 62,
             city: 'Essex'
@@ -218,8 +218,8 @@ var functionality = (function() {
             content += '<div class="user">';
             content += '<h2>' + el.name + ' ' + el.surname + '<span>( ' + el.age + ' )</span>' + '</h2>';
             content += '<h3>' + el.city + '</h3>';
-            content += '<p>phone: ' + el.email + '</p>';
-            content += '<p>email: ' + el.phone + '</p>';
+            content += '<p>phone: ' + el.phone + '</p>';
+            content += '<p>email: ' + el.email + '</p>';
             content += '</div>';
         });
         return content;
