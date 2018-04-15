@@ -1,3 +1,6 @@
+body {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
 .sideMenu {
   position: absolute;
   box-sizing: border-box;
@@ -7,6 +10,7 @@
   height: calc( 100% - 50px);
 }
 .sideMenu button {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   width: 100%;
   display: block;
   text-align: center;
@@ -44,6 +48,7 @@
   background-color: #60b787;
 }
 .topBar select {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   width: 300px;
   height: 100%;
   cursor: pointer;
@@ -229,6 +234,38 @@
 .inputAlert {
   margin-left: 15px;
   color: red;
+}
+@keyframes example {
+  0% {
+      background-color: red;
+ }
+  25% {
+      background-color: yellow;
+ }
+  50% {
+      background-color: blue;
+ }
+  100% {
+      background-color: green;
+ }
+}
+.alertBasics {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  transition: 2s;
+  background: #89c9a6;
+  font-size: 2em;
+  text-align: center;
+  padding: 10px 50px;
+  bottom: 0px;
+  right: -600px;
+  color: white;
+  z-index: 20;
+  position: fixed;
+}
+.alert {
+  transition-duration: 2s;
+  bottom: 0px;
+  right: 0px;
 }
 ::-webkit-scrollbar {
   width: 15px;

@@ -118,7 +118,10 @@ var functionality = (function() {
                     $('#popup').addClass('hidden');
                     $('#popupWindow').addClass('hidden');
                     $('#userSorting').attr('disabled', false);
+                    $('#newUserAlert').addClass('alert');
+                    setTimeout(hideAlert, 5000);
                     clearForm();
+
                 }
             }
         });
@@ -317,7 +320,12 @@ var functionality = (function() {
         $('#ageAlert').html('');
         $('#cityAlert').html('');
     });
-
+    /**
+     * Function called in setTimeot to hide newUserAlert
+     */
+    var hideAlert = function() {
+        $('#newUserAlert').removeClass('alert');
+    }
     /**
      * Functions what must be executed when document is fully loaded
      */
